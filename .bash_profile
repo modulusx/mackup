@@ -22,7 +22,8 @@ alias dls='docker ps -a'
 alias drmall='docker rm $(docker ps -aq)'
 
 alias gclone='git clone'
-alias gstatus='git status'
+alias gs='git status -uno'
+alias gcom='git checkout origin/master'
 
 alias jbuild='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it jekyll/jekyll:3.8.5 jekyll build'
 alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -p 127.0.0.1:4000:4000 jekyll/jekyll:3.8.5 jekyll serve'
