@@ -3,7 +3,8 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-alias ll='ls -hlG'
+alias l='ls -halG'
+alias ll='ls -halG'
 alias govi='set -o vi'
 alias vihosts='sudo vi /etc/hosts'
 alias flushdns='sudo killall -HUP mDNSResponder'
@@ -29,6 +30,33 @@ alias jbuild='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it j
 alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -p 127.0.0.1:4000:4000 jekyll/jekyll:3.8.5 jekyll serve'
 
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
+
+mcd () {
+    mkdir -p $1
+    cd $1
+}
+
+gitclonemrk () {
+  MRKREPO=$(echo $1 | sed -e 's/github.com/github.com.mrk/')
+  git clone $MRKREPO
+}
+
+gitremotemrk () {
+  MRKREPO=$(git remote -v | awk -F' ' '{print $2}' | head -n1 | sed -e 's/github.com/github.com.mrk/')
+  git remote remove origin
+  git remote add origin $MRKREPO
+}
+
+gitclonemod () {
+  MODREPO=$(echo $1 | sed -e 's/github.com/github.com.mod/')
+  git clone $MODREPO
+}
+
+gitremotemod () {
+  MODREPO=$(git remote -v | awk -F' ' '{print $2}' | head -n1 | sed -e 's/github.com/github.com.mod/')
+  git remote remove origin
+  git remote add origin $MODREPO
+}
 
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
