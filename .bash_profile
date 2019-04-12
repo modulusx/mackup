@@ -32,7 +32,7 @@ alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -
 alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
-mcd () {
+mkcd () {
     mkdir -p $1
     cd $1
 }
