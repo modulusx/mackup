@@ -19,16 +19,17 @@ alias keygen='openssl rand -base64 16 | colrm 17'
 
 alias sshinv='ssh $(cat inventory)'
 
-alias dls='docker ps -a'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
 alias drmall='docker rm $(docker ps -aq)'
 
-alias gclone='git clone'
 alias gs='git status -uno'
 alias gcom='git checkout origin/master'
 
 alias jbuild='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it jekyll/jekyll:3.8.5 jekyll build'
 alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -p 127.0.0.1:4000:4000 jekyll/jekyll:3.8.5 jekyll serve'
 
+alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
 mcd () {
