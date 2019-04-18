@@ -35,7 +35,7 @@ alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -
 alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
-alias terraform='docker run --rm --label=terraform --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" -it hashicorp/terraform:0.11.13'
+alias terraform='docker run --rm --label=terraform --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" --volume="$(pwd):/tfstate" -w="/tfstate" -it hashicorp/terraform:0.11.13'
 
 mkcd () {
     mkdir -p $1
