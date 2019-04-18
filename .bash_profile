@@ -18,11 +18,14 @@ alias noblue='blueutil -p 0'
 alias keygen='openssl rand -base64 16 | colrm 17'
 
 alias sshinv='ssh $(cat inventory)'
+alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
+alias sshmrk='ssh -i ~/.ssh/id_rsa_mrkunkel'
 
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias drmall='docker rm $(docker ps -aq)'
 
+alias gr='git remote -v'
 alias gs='git status -uno'
 alias gcom='git checkout origin/master'
 
@@ -32,31 +35,39 @@ alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -
 alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
+alias terraform='docker run --rm --label=terraform --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" -it hashicorp/terraform:0.11.13'
+
 mkcd () {
     mkdir -p $1
     cd $1
 }
 
-gitclonemrk () {
+gbup () {
+  git branch --set-upstream-to=origin/$1 $1
+}
+
+gcmrk () {
   MRKREPO=$(echo $1 | sed -e 's/github.com/github.com.mrk/')
   git clone $MRKREPO
 }
 
-gitremotemrk () {
+grmrk () {
   MRKREPO=$(git remote -v | awk -F' ' '{print $2}' | head -n1 | sed -e 's/github.com/github.com.mrk/')
   git remote remove origin
   git remote add origin $MRKREPO
+  git remote -v
 }
 
-gitclonemod () {
+gcmod () {
   MODREPO=$(echo $1 | sed -e 's/github.com/github.com.mod/')
   git clone $MODREPO
 }
 
-gitremotemod () {
+grmod () {
   MODREPO=$(git remote -v | awk -F' ' '{print $2}' | head -n1 | sed -e 's/github.com/github.com.mod/')
   git remote remove origin
   git remote add origin $MODREPO
+  git remote -v
 }
 
 parse_git_branch() {
