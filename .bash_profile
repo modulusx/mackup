@@ -3,7 +3,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-alias l='ls -halG'
+alias l='ls -hlG'
 alias ll='ls -halG'
 alias govi='set -o vi'
 alias vihosts='sudo vi /etc/hosts'
@@ -11,11 +11,10 @@ alias flushdns='sudo killall -HUP mDNSResponder'
 alias pings='ping -c2'
 alias digs='dig +short'
 alias digns='dig +short NS'
+alias keygen='openssl rand -base64 16 | colrm 17'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
-
-alias keygen='openssl rand -base64 16 | colrm 17'
 
 alias sshinv='ssh $(cat inventory)'
 alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
@@ -28,6 +27,7 @@ alias drmall='docker rm $(docker ps -aq)'
 alias gr='git remote -v'
 alias gs='git status -uno'
 alias gcom='git checkout origin/master'
+alias groot='git rev-parse --show-toplevel'
 
 alias jbuild='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it jekyll/jekyll:3.8.5 jekyll build'
 alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -p 127.0.0.1:4000:4000 jekyll/jekyll:3.8.5 jekyll serve'
@@ -35,11 +35,22 @@ alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -
 alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
-alias terraform='docker run --rm --label=terraform --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" --volume="$(pwd):/tfstate" -w="/tfstate" -it hashicorp/terraform:0.11.13'
 
 mkcd () {
     mkdir -p $1
     cd $1
+}
+
+terraform () {
+  prjwd=$(pwd) 
+  prjroot=$(git rev-parse --show-toplevel) 
+  prjpath=${prjwd#"$prjroot"}
+  docker run --rm --label=terraform \
+                  --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" \
+                  --volume="$(dirname ~/.ssh/)/.ssh/:/root/.ssh/:ro" \
+                  --volume="$prjroot:/project" \
+                  -w="/project$prjpath" \
+                  -it hashicorp/terraform:0.11.13 $1
 }
 
 gbup () {
