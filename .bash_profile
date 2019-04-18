@@ -50,7 +50,7 @@ terraform () {
                   --volume="$(dirname ~/.ssh/)/.ssh/:/root/.ssh/:ro" \
                   --volume="$prjroot:/project" \
                   -w="/project$prjpath" \
-                  -it hashicorp/terraform:0.11.13 $1
+                  -it hashicorp/terraform:0.11.13 $@
 }
 
 gbup () {
