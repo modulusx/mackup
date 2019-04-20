@@ -15,6 +15,7 @@ alias keygen='openssl rand -base64 16 | colrm 17'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
+alias yubi='ykman oath code'
 
 alias sshinv='ssh $(cat inventory)'
 alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
@@ -35,6 +36,7 @@ alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -
 alias kube='kubectl'
 alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
 
+alias awswhoami='aws sts get-caller-identity --profile'
 
 mkcd () {
     mkdir -p $1
