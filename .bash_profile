@@ -15,7 +15,6 @@ alias keygen='openssl rand -base64 16 | colrm 17'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
-alias yubi='ykman oath code'
 
 alias sshinv='ssh $(cat inventory)'
 alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
@@ -41,6 +40,15 @@ alias awswhoami='aws sts get-caller-identity --profile'
 mkcd () {
     mkdir -p $1
     cd $1
+}
+
+yubi () {
+  if [ $# -eq 0 ]
+  then
+    ykman oath code
+  else
+    ykman oath code $1 | awk -F' ' '{print $2}' | pbcopy
+  fi
 }
 
 terraform () {
@@ -86,4 +94,4 @@ grmod () {
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+export PS1="\n\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
