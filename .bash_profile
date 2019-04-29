@@ -96,4 +96,7 @@ parse_git_branch() {
 }
 export PS1="\n\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
-complete -C '/usr/local/bin/aws_completer' aws
+# Standard brew bash completion
+for bcfile in /usr/local/etc/bash_completion.d/* ; do
+  . $bcfile
+done
