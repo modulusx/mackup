@@ -42,6 +42,7 @@ alias tfv='terraform validate'
 alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfaa='terraform apply -auto-approve'
+alias tfro='terraform refresh && terraform output'
 alias tfd='terraform destroy'
 alias tfda='terraform destroy -auto-approve'
 
