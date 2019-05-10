@@ -2,6 +2,9 @@
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+export GOPATH="${HOME}/Data/Repos/go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 alias l='ls -hlG'
 alias ll='ls -halG'
