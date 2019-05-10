@@ -25,7 +25,8 @@ alias dpsa='docker ps -a'
 alias drmall='docker rm $(docker ps -aq)'
 
 alias gr='git remote -v'
-alias gs='git status -uno'
+alias gs='git status'
+alias gsu='git status -uno'
 alias gcom='git checkout origin/master'
 alias groot='git rev-parse --show-toplevel'
 
@@ -33,7 +34,16 @@ alias jbuild='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it j
 alias jserve='docker run --rm --label=jekyll --volume="$(pwd):/srv/jekyll" -it -p 127.0.0.1:4000:4000 jekyll/jekyll:3.8.5 jekyll serve'
 
 alias kube='kubectl'
-alias kexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
+alias kubeexec='kubectl run busybox --image=busybox:1.28 --rm -it --restart=Never --command --'
+
+alias tfi='terraform init'
+alias tff='terraform fmt'
+alias tfv='terraform validate'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfaa='terraform apply -auto-approve'
+alias tfd='terraform destroy'
+alias tfda='terraform destroy -auto-approve'
 
 alias awswhoami='aws sts get-caller-identity --profile'
 
@@ -51,16 +61,24 @@ yubi () {
   fi
 }
 
-terraform () {
-  prjwd=$(pwd) 
-  prjroot=$(git rev-parse --show-toplevel) 
+dansible () {
+  docker run --rm -it --label=ansible \
+                  --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" \
+                  --volume="$(dirname ~/.ssh/)/.ssh/:/root/.ssh/:ro" \
+                  --volume="$(pwd):/project" \
+                  ansible/ansible:default $@
+}
+
+dterraform () {
+  prjwd=$(pwd)
+  prjroot=$(git rev-parse --show-toplevel)
   prjpath=${prjwd#"$prjroot"}
-  docker run --rm --label=terraform \
+  docker run --rm -it --label=terraform \
                   --volume="$(dirname ~/.aws/)/.aws/:/root/.aws/:ro" \
                   --volume="$(dirname ~/.ssh/)/.ssh/:/root/.ssh/:ro" \
                   --volume="$prjroot:/project" \
                   -w="/project$prjpath" \
-                  -it hashicorp/terraform:0.11.13 $@
+                  hashicorp/terraform:0.11.13 $@
 }
 
 gbup () {
