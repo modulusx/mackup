@@ -116,7 +116,23 @@ grmod () {
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
-export PS1="\n\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+PROMPT_COMMAND=__prompt_command
+__prompt_command() {
+    local EXIT="$?"
+    PS1=""
+
+    local RCol='\[\e[0m\]'
+    local Red='\[\e[0;31m\]'
+    local Gre='\[\e[0;32m\]'
+    local BBlu='\[\e[1;34m\]'
+
+    if [ $EXIT != 0 ]; then
+        PS1+="${Red}\W${RCol}"
+    else
+        PS1+="${Gre}\W${RCol}"
+    fi
+    PS1+="${RCol}${BBlu}\$(parse_git_branch) ${RCol}$ "
+}
 
 # Standard brew bash completion
 for bcfile in /usr/local/etc/bash_completion.d/* ; do
