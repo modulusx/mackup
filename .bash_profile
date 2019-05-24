@@ -20,6 +20,7 @@ alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
 alias cdc='pwd | pbcopy'
 alias cdp='cd $(pbpaste)'
+alias mrkprfs='defaults write NSGlobalDomain AppleShowAllExtensions -bool false && killall Finder && killall Spotlight'
 
 alias sshinv='ssh $(cat inventory)'
 alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
