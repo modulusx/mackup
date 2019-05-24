@@ -129,9 +129,9 @@ __prompt_command() {
     local BBlu='\[\e[1;34m\]'
 
     if [ $EXIT != 0 ]; then
-        PS1+="${Red}\W${RCol}"
+        PS1+="\n${Red}\W${RCol}"
     else
-        PS1+="${Gre}\W${RCol}"
+        PS1+="\n${Gre}\W${RCol}"
     fi
     PS1+="${RCol}${BBlu}\$(parse_git_branch) ${RCol}$ "
 }
