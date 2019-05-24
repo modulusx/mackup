@@ -18,6 +18,8 @@ alias keygen='openssl rand -base64 16 | colrm 17'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
+alias cdc='pwd | pbcopy'
+alias cdp='cd $(pbpaste)'
 
 alias sshinv='ssh $(cat inventory)'
 alias sshmod='ssh -i ~/.ssh/id_rsa_modulusx'
