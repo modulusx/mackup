@@ -53,6 +53,7 @@ alias tfd='terraform destroy'
 alias tfda='terraform destroy -auto-approve'
 
 alias awswhoami='aws sts get-caller-identity --profile'
+alias awsssprod='yubi ssprod && pbpaste | aws-mfa'
 
 mkcd () {
     mkdir -p $1
