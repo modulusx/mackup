@@ -18,6 +18,7 @@ alias keygen='openssl rand -base64 16 | colrm 17'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
+alias cdatp='cd ~/Data/Repos/sfdcit/aws-tf/proj/'
 alias cdc='pwd | pbcopy'
 alias cdp='cd $(pbpaste)'
 alias mrkprfs='defaults write NSGlobalDomain AppleShowAllExtensions -bool false && killall Finder && killall Spotlight'
@@ -53,7 +54,7 @@ alias tfd='terraform destroy'
 alias tfda='terraform destroy -auto-approve'
 
 alias awswhoami='aws sts get-caller-identity --profile'
-alias awsssprod='yubi ssprod && pbpaste | aws-mfa'
+alias awsssprod='yubi aws && pbpaste | aws-mfa'
 
 mkcd () {
     mkdir -p $1
@@ -142,3 +143,6 @@ __prompt_command() {
 for bcfile in /usr/local/etc/bash_completion.d/* ; do
   . $bcfile
 done
+
+#Override Java
+#export JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`"
