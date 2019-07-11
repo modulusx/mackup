@@ -21,3 +21,7 @@ let g:terraform_remap_spacebar=1
 
 " Source our normal shell
 set shell=bash\ --login
+
+" Show them ugly tabs
+set list
+set listchars=tab:>-
