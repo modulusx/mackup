@@ -24,4 +24,4 @@ set shell=bash\ --login
 
 " Show them ugly tabs
 set list
-set listchars=tab:>-
+set listchars=tab:-·,trail:·

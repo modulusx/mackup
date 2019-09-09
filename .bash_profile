@@ -2,6 +2,8 @@
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+launchctl setenv JAVA_HOME `/usr/libexec/java_home`
+export JAVA_HOME=`/usr/libexec/java_home`
 export GOPATH="${HOME}/Data/Repos/go"
 export GOROOT="/usr/local/opt/go/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
@@ -15,6 +17,7 @@ alias pings='ping -c2'
 alias digs='dig +short'
 alias digns='dig +short NS'
 alias keygen='openssl rand -base64 16 | colrm 17'
+alias shasum256='shasum -a 256'
 alias mydate='date +"%F %T"'
 alias goblue='blueutil -p 1'
 alias noblue='blueutil -p 0'
@@ -143,6 +146,3 @@ __prompt_command() {
 for bcfile in /usr/local/etc/bash_completion.d/* ; do
   . $bcfile
 done
-
-#Override Java
-#export JAVA_HOME="`/usr/libexec/java_home -v '1.8*'`"
