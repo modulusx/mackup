@@ -24,6 +24,7 @@ alias noblue='blueutil -p 0'
 alias cdatp='cd ~/Data/Repos/sfdcit/aws-tf/proj/'
 alias cdc='pwd | pbcopy'
 alias cdp='cd $(pbpaste)'
+alias ssh-keyprint="cut -d ' ' -f2 | base64 -D | md5 | sed 's/../&:/g; s/:$//'"
 alias mrkprfs='defaults write NSGlobalDomain AppleShowAllExtensions -bool false && killall Finder && killall Spotlight'
 
 alias sshinv='ssh $(cat inventory)'
