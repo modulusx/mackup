@@ -68,7 +68,7 @@ mkcd () {
 yubi () {
   if [ $# -eq 0 ]
   then
-    ykman oath code
+    ykman oath code && sleep 4 && clear
   else
     ykman oath code $1 | awk -F' ' '{print $2}' | pbcopy
   fi
